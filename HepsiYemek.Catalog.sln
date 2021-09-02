@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{855C2AB8-160A-4DE3-A2F4-B7D495B48956}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{9A631500-C3AA-4F2D-B439-913A9AB4910C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HepsiYemek.Catalog.Api", "HepsiYemek.Catalog.Api\HepsiYemek.Catalog.Api.csproj", "{53447B4C-813A-4831-A687-89BE145F56EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HepsiYemek.Catalog.Core", "HepsiYemek.Catalog.Core\HepsiYemek.Catalog.Core.csproj", "{31750089-DBEA-409E-B1AA-6F9D88A0DF7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HepsiYemek.Catalog.Service", "HepsiYemek.Catalog.Service\HepsiYemek.Catalog.Service.csproj", "{1CCFE203-FB24-4586-B794-24730F33A0CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HepsiYemek.Catalog.Data", "HepsiYemek.Catalog.Data\HepsiYemek.Catalog.Data.csproj", "{79E3612F-B86E-4E38-866E-31D0857C5D91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HepsiYemek.Catalog.Service.Tests", "HepsiYemek.Catalog.Service.Tests\HepsiYemek.Catalog.Service.Tests.csproj", "{DB8B45B6-153C-43EC-94E5-5E9B500B23CE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53447B4C-813A-4831-A687-89BE145F56EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53447B4C-813A-4831-A687-89BE145F56EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53447B4C-813A-4831-A687-89BE145F56EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53447B4C-813A-4831-A687-89BE145F56EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31750089-DBEA-409E-B1AA-6F9D88A0DF7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31750089-DBEA-409E-B1AA-6F9D88A0DF7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31750089-DBEA-409E-B1AA-6F9D88A0DF7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31750089-DBEA-409E-B1AA-6F9D88A0DF7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CCFE203-FB24-4586-B794-24730F33A0CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CCFE203-FB24-4586-B794-24730F33A0CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CCFE203-FB24-4586-B794-24730F33A0CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CCFE203-FB24-4586-B794-24730F33A0CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79E3612F-B86E-4E38-866E-31D0857C5D91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79E3612F-B86E-4E38-866E-31D0857C5D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79E3612F-B86E-4E38-866E-31D0857C5D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79E3612F-B86E-4E38-866E-31D0857C5D91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB8B45B6-153C-43EC-94E5-5E9B500B23CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB8B45B6-153C-43EC-94E5-5E9B500B23CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB8B45B6-153C-43EC-94E5-5E9B500B23CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB8B45B6-153C-43EC-94E5-5E9B500B23CE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{79E3612F-B86E-4E38-866E-31D0857C5D91} = {855C2AB8-160A-4DE3-A2F4-B7D495B48956}
+		{DB8B45B6-153C-43EC-94E5-5E9B500B23CE} = {9A631500-C3AA-4F2D-B439-913A9AB4910C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {77DDBB85-8F82-48C6-A18D-152F650FA292}
+	EndGlobalSection
+EndGlobal
