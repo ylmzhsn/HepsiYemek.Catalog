@@ -4,7 +4,7 @@ namespace HepsiYemek.Catalog.Api
     using Microsoft.Extensions.Hosting;
     using Serilog;
 
-    using HepsiYemek.Catalog.Core.CrossCuttinConcerns.Logging.Loggers;
+    using HepsiYemek.Catalog.Core.CrossCuttingConcerns.Logging.Loggers;
 
     public class Program
     {
