@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HepsiYemek.Catalog.Core\HepsiYemek.Catalog.Core.csproj" />
     <ProjectReference Include="..\HepsiYemek.Catalog.Data\HepsiYemek.Catalog.Data.csproj" />
   </ItemGroup>
 

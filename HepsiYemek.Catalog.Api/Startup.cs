@@ -16,6 +16,13 @@ namespace HepsiYemek.Catalog.Api
     // own project references
     using HepsiYemek.Catalog.Data;
     using HepsiYemek.Catalog.Data.Interfaces;
+    using HepsiYemek.Catalog.Service.Interfaces;
+    using HepsiYemek.Catalog.Service;
+    using Microsoft.Extensions.Options;
+    using StackExchange.Redis.Extensions.Core.Configuration;
+    using StackExchange.Redis.Extensions.Newtonsoft;
+    using HepsiYemek.Catalog.Core.CrossCuttingConcerns.Caching.Redis;
+    using HepsiYemek.Catalog.Core.CrossCuttingConcerns.Caching.Abstract;
 
     public class Startup
     {
@@ -29,16 +36,39 @@ namespace HepsiYemek.Catalog.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<CatalogDatabaseSettings>(
+                Configuration.GetSection(nameof(CatalogDatabaseSettings)));
+
+            services.AddSingleton(sp =>
+                sp.GetRequiredService<IOptions<CatalogDatabaseSettings>>().Value);
+
+            services.AddSingleton<RedisServer>();
+
+            services.AddSingleton<ICacheService, RedisCacheService>();
+
             services.AddScoped<ICatalogContext, CatalogContext>();
 
+            services.AddScoped<ICategoryService, CategoryService>();
+
+            services.AddScoped<IProductService, ProductService>();
+
             services.AddControllers();
+
+            var redisConfiguration = Configuration.GetSection("Redis").Get<RedisConfiguration>();
+
+            services.AddControllersWithViews();
+
+            services.AddStackExchangeRedisExtensions<NewtonsoftSerializer>(redisConfiguration);
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HepsiYemek.Catalog.Api", Version = "v1" });
             });
 
             services.AddHealthChecks()
-                    .AddMongoDb(Configuration["DatabaseSettings:ConnectionString"], "MongoDb Health", HealthStatus.Degraded);
+                    .AddMongoDb(Configuration["CatalogDatabaseSettings:ConnectionString"], "MongoDb Health", HealthStatus.Degraded)
+                    .AddElasticsearch(Configuration["ElasticConfiguration:Uri"], "ElasticSearch Health", HealthStatus.Degraded)
+                    .AddRedis("127.0.0.1:6379", "Redis Health", HealthStatus.Degraded);                    
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +77,9 @@ namespace HepsiYemek.Catalog.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
                 app.UseSwagger();
+
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HepsiYemek.Catalog.Api v1"));
             }
 
@@ -60,12 +92,15 @@ namespace HepsiYemek.Catalog.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
                 endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
                 {
                     Predicate = _ => true,
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
                 });
             });
+
+            app.UseHealthChecksUI();
         }
     }
 }
