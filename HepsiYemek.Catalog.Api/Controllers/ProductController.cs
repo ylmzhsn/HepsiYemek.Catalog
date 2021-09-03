@@ -12,7 +12,7 @@
     using HepsiYemek.Catalog.Service.Interfaces;
 
     [ApiController]
-    [Route("api/v1/[products]")]
+    [Route("api/products")]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;

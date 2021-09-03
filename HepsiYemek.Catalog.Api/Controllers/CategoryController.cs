@@ -12,7 +12,7 @@
     using HepsiYemek.Catalog.Service.Interfaces;
 
     [ApiController]
-    [Route("api/v1/[categories]")]
+    [Route("api/categories")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
@@ -32,7 +32,6 @@
 
             return Ok(categories);
         }
-
 
         [HttpGet("{id:length(24)}", Name = "GetCategory")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
@@ -77,7 +76,7 @@
             return CreatedAtRoute("GetCategory", new { id = category._id }, category);
         }
 
-        [HttpPut]
+        [HttpPut("{id:length(24)}", Name = "UpdateCategory")]
         [ProducesResponseType(typeof(Category), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> UpdateCategory([FromBody] Category category)
         {
