@@ -1,23 +1,10 @@
-﻿namespace HepsiYemek.Catalog.Data.Entities
+﻿namespace HepsiYemek.Catalog.Service.DTO
 {
-    using MongoDB.Bson;
-    using MongoDB.Bson.Serialization.Attributes;
-
-    /// <summary>
-    /// Product of hepsiyemek in mongodb collection
-    /// </summary>
-    public class Product
+    public class ProductDto
     {
-        /// <summary>
-        /// ObjectId of the product in mongodb collection
-        /// </summary>
-        [BsonId]
-        public ObjectId _id { get; set; }
-
         /// <summary>
         /// Name of of the product
         /// </summary>
-        [BsonElement("Name")]
         public string Name { get; set; }
 
         /// <summary>
@@ -26,9 +13,10 @@
         public string Description { get; set; }
 
         /// <summary> 
-        /// Category of the product
+        /// CategoryId of the product
+        /// Represents relationship between categories and products
         /// </summary>
-        public Category Category { get; set; }
+        public string CategoryId { get; set; }
 
         /// <summary>
         /// Price of the product

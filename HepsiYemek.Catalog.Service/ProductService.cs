@@ -12,6 +12,7 @@
     using HepsiYemek.Catalog.Core.CrossCuttingConcerns.Caching.Abstract;
     using HepsiYemek.Catalog.Core.Utilities;
     using MongoDB.Bson;
+    using HepsiYemek.Catalog.Service.DTO;
 
     /// <summary>
     /// Product repository service
@@ -50,36 +51,23 @@
         /// <returns><see cref="Product"/></returns>
         public async Task<Product> GetProduct(string id)
         {
-            var collection = _context.Database.GetCollection<Product>("Products");
+            /// TODO : there is a bug about deserialization will be fixed until then redis cache is not available
+            
+            /// 
+            //if (_cacheService.Any(string.Format(Constants.Redis.Product, id)))
+            //{
+            ///var cachedProduct = _cacheService.Get<Product>(string.Format(Constants.Redis.Product, id));
+            //    return cachedProduct;
+            //}
 
-            var docs = collection.Aggregate()
-                                 .Lookup("Categories", "CategoryId", "_id", "asCategories")
-                                 .As<BsonDocument>()
-                                 .ToList();
-
-            foreach (var doc in docs)
-            {
-                Console.WriteLine(doc.ToJson());
-            }
-
-
-            var product = new Product();
-
-            if (_cacheService.Any(Constants.Redis.Product))
-            {
-                product = _cacheService.Get<Product>(Constants.Redis.Product);
-
-                return product;
-            }
-
-            product = await _context
+            var product = await _context
                            .Products
                            .Find(p => p._id == new ObjectId(id))
                            .FirstOrDefaultAsync();
 
-            _cacheService.Add(Constants.Redis.Product, product);
+            //_cacheService.Add(string.Format(Constants.Redis.Product, id), product);
 
-            _cacheService.SetTTL(Constants.Redis.Product, TimeSpan.FromMinutes(5));
+            //_cacheService.SetTTL(Constants.Redis.Product, TimeSpan.FromMinutes(5));
 
             return product;
         }
@@ -106,7 +94,7 @@
         /// <returns>IEnumarable list of <see cref="Product"/></returns>
         public async Task<IEnumerable<Product>> GetProductByCategory(string categoryId)
         {
-            FilterDefinition<Product> filter = Builders<Product>.Filter.Eq(p => p.CategoryId, new ObjectId(categoryId));
+            FilterDefinition<Product> filter = Builders<Product>.Filter.Eq(p => p.Category._id, new ObjectId(categoryId));
 
             return await _context
                             .Products
@@ -119,21 +107,50 @@
         /// </summary>
         /// <param name="product"><see cref="Product"/></param>
         /// <returns><see cref="Task"/></returns>
-        public async Task CreateProduct(Product product)
+        public async Task<Product> CreateProduct(ProductDto productDto)
         {
+            var category = await _context
+                           .Categories
+                           .Find(p => p._id == new ObjectId(productDto.CategoryId))
+                           .FirstOrDefaultAsync();
+
+            var product = new Product
+            {
+                Name = productDto.Name,
+                Description = productDto.Description,
+                Category = category,
+                Price = productDto.Price,
+                Currency = productDto.Currency
+            };
+
             await _context.Products.InsertOneAsync(product);
+
+            return product;
         }
 
         /// <summary>
         /// Updates a product in collection
         /// </summary>
         /// <param name="product"><see cref="Product"/></param>
+        /// <param name="id"><see cref="string"/></param>
         /// <returns>Task TResult of <see cref="bool"/></returns>
-        public async Task<bool> UpdateProduct(Product product)
+        public async Task<bool> UpdateProduct(ProductDto productDto, string id)
         {
-            var updateResult = await _context
-                                        .Products
-                                        .ReplaceOneAsync(filter: g => g._id == product._id, replacement: product);
+            var category = await _context
+                           .Categories
+                           .Find(p => p._id == new ObjectId(productDto.CategoryId))
+                           .FirstOrDefaultAsync();
+
+            var filter = Builders<Product>.Filter.Eq(x => x._id, new ObjectId(id));
+
+            var update = Builders<Product>.Update
+                .Set(x => x.Name, productDto.Name)
+                .Set(x => x.Description, productDto.Description)
+                .Set(x => x.Currency, productDto.Currency)
+                .Set(x => x.Price, productDto.Price)
+                .Set(x => x.Category, category);
+
+            var updateResult = await _context.Products.UpdateOneAsync(filter, update);
 
             return updateResult.IsAcknowledged
                     && updateResult.ModifiedCount > 0;

@@ -1,9 +1,14 @@
 ﻿
 namespace HepsiYemek.Catalog.Core.CrossCuttingConcerns.Caching.Redis
 {
-    using HepsiYemek.Catalog.Core.CrossCuttingConcerns.Caching.Abstract;
-    using Newtonsoft.Json;
     using System;
+    using System.Text;
+    
+    using Newtonsoft.Json;
+    using StackExchange.Redis;
+    
+
+    using HepsiYemek.Catalog.Core.CrossCuttingConcerns.Caching.Abstract;
 
     /// <summary>
     /// Redis cache service.
@@ -25,8 +30,39 @@ namespace HepsiYemek.Catalog.Core.CrossCuttingConcerns.Caching.Redis
         /// </summary>
         public void Add(string key, object data)
         {
-            string jsonData = JsonConvert.SerializeObject(data);
-            _redisServer.Database.StringSet(key, jsonData);
+            if (data == null)
+            {
+                return;
+            }
+
+            byte[] entry = Serialize(data);
+
+            _redisServer.Database.StringSet(key, entry);
+        }
+
+        /// <summary>
+        /// Serialize item to byte array
+        /// </summary>
+        protected virtual byte[] Serialize<T>(T item)
+        {
+            string jsonString = JsonConvert.SerializeObject(item);
+
+            return Encoding.UTF8.GetBytes(jsonString);
+        }
+
+        /// <summary>
+        /// Deserialize byte array to T object
+        /// </summary>
+        protected virtual T Deserialize<T>(byte[] serializedObject)
+        {
+            if (serializedObject == null)
+            {
+                return default(T);
+            }
+
+            string jsonString = Encoding.UTF8.GetString(serializedObject);
+
+            return JsonConvert.DeserializeObject<T>(jsonString);
         }
 
         /// <summary>
@@ -49,9 +85,9 @@ namespace HepsiYemek.Catalog.Core.CrossCuttingConcerns.Caching.Redis
         {
             if (Any(key))
             {
-                var jsonData = _redisServer.Database.StringGet(key);
+                RedisValue redisValue = _redisServer.Database.StringGet(key);
 
-                return JsonConvert.DeserializeObject<T>(jsonData);
+                return Deserialize<T>(redisValue);
             }
 
             return default;

@@ -30,9 +30,9 @@
 
         private void CreateRedisConfigurationString(IConfiguration configuration)
         {
-            var host = configuration.GetSection("Redis:Hosts:Host").Value;
+            var host = configuration.GetSection("Redis:Hosts:0:Host").Value;
 
-            var port = configuration.GetSection("Redis:Hosts:Port").Value;
+            var port = configuration.GetSection("Redis:Hosts:0:Port").Value;
 
             configurationString = $"{host}:{port}";
         }

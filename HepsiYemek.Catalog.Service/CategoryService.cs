@@ -5,10 +5,12 @@
     using System.Threading.Tasks;
 
     using MongoDB.Driver;
+    using MongoDB.Bson;
 
     using HepsiYemek.Catalog.Data.Entities;
     using HepsiYemek.Catalog.Data.Interfaces;
     using HepsiYemek.Catalog.Service.Interfaces;
+    using HepsiYemek.Catalog.Service.DTO;
 
     /// <summary>
     /// Product repository service
@@ -47,7 +49,7 @@
         {
             return await _context
                            .Categories
-                           .Find(p => p._id == id)
+                           .Find(p => p._id == new ObjectId(id))
                            .FirstOrDefaultAsync();
         }
 
@@ -58,7 +60,7 @@
         /// <returns>IEnumarable list of <see cref="Category"/></returns>
         public async Task<IEnumerable<Category>> GetCategoryByName(string name)
         {
-            FilterDefinition<Category> filter = Builders<Category>.Filter.ElemMatch(c => c.Name, name);
+            FilterDefinition<Category> filter = Builders<Category>.Filter.Where(c => c.Name == name);
 
             return await _context
                             .Categories
@@ -69,26 +71,53 @@
         /// <summary>
         /// Creates a new category into collection
         /// </summary>
-        /// <param name="category"><see cref="Category"/></param>
+        /// <param name="categoryDto"><see cref="CategoryDto"/></param>
         /// <returns><see cref="Task"/></returns>
-        public async Task CreateCategory(Category category)
+        public async Task<Category> CreateCategory(CategoryDto categoryDto)
         {
+            var category = new Category
+            {
+                Name = categoryDto.Name,
+                Description = categoryDto.Description
+            };
+
             await _context.Categories.InsertOneAsync(category);
+
+            return category;
         }
 
         /// <summary>
         /// Updates a category in collection
         /// </summary>
-        /// <param name="category"><see cref="Category"/></param>
+        /// <param name="categoryDto"><see cref="CategoryDto"/></param>
         /// <returns>Task TResult of <see cref="bool"/></returns>
-        public async Task<bool> UpdateCategory(Category category)
+        public async Task<bool> UpdateCategory(CategoryDto categoryDto, string id)
         {
-            var updateResult = await _context
-                                        .Categories
-                                        .ReplaceOneAsync(filter: g => g._id == category._id, replacement: category);
+            var filter = Builders<Category>.Filter.Eq(x => x._id, new ObjectId(id));
 
-            return updateResult.IsAcknowledged
-                    && updateResult.ModifiedCount > 0;
+            var update = Builders<Category>.Update
+                .Set(x => x.Name, categoryDto.Name)
+                .Set(x => x.Description, categoryDto.Description);
+
+            var updateResult = await _context.Categories.UpdateOneAsync(filter, update);
+
+            var updateSucceeded = updateResult.IsAcknowledged && updateResult.ModifiedCount > 0;
+
+            if (!updateSucceeded)
+            {
+                return updateSucceeded;
+            }
+
+            var productFilter = Builders<Product>.Filter.Eq(p => p.Category._id, new ObjectId(id));
+
+            var updateProduct = Builders<Product>.Update
+                .Set(x => x.Category.Description, categoryDto.Description)
+                .Set(x => x.Category.Name, categoryDto.Name);
+
+            var productUpdateResult = await _context.Products.UpdateOneAsync(productFilter, updateProduct);
+
+            return productUpdateResult.IsAcknowledged
+                    && productUpdateResult.ModifiedCount > 0;
         }
 
         /// <summary>
@@ -98,7 +127,7 @@
         /// <returns>Task TResult of <see cref="bool"/></returns>
         public async Task<bool> DeleteCategory(string id)
         {
-            FilterDefinition<Category> filter = Builders<Category>.Filter.Eq(c => c._id, id);
+            FilterDefinition<Category> filter = Builders<Category>.Filter.Eq(c => c._id, new ObjectId(id));
 
             DeleteResult deleteResult = await _context
                                                 .Categories

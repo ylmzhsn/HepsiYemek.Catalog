@@ -42,6 +42,9 @@ namespace HepsiYemek.Catalog.Api
             services.AddSingleton(sp =>
                 sp.GetRequiredService<IOptions<CatalogDatabaseSettings>>().Value);
 
+            services.Configure<RedisServer>(
+                Configuration.GetSection(nameof(RedisServer)));
+
             services.AddSingleton<RedisServer>();
 
             services.AddSingleton<ICacheService, RedisCacheService>();

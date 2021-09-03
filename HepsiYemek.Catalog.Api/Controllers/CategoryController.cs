@@ -10,6 +10,7 @@
 
     using HepsiYemek.Catalog.Data.Entities;
     using HepsiYemek.Catalog.Service.Interfaces;
+    using HepsiYemek.Catalog.Service.DTO;
 
     [ApiController]
     [Route("api/categories")]
@@ -69,18 +70,18 @@
 
         [HttpPost]
         [ProducesResponseType(typeof(Category), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Category>> CreateCategory([FromBody] Category category)
+        public async Task<ActionResult<Category>> CreateCategory([FromBody] CategoryDto categoryDto)
         {
-            await _categoryService.CreateCategory(category);
+            var category = await _categoryService.CreateCategory(categoryDto);
 
             return CreatedAtRoute("GetCategory", new { id = category._id }, category);
         }
 
         [HttpPut("{id:length(24)}", Name = "UpdateCategory")]
         [ProducesResponseType(typeof(Category), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> UpdateCategory([FromBody] Category category)
+        public async Task<IActionResult> UpdateCategory([FromBody] CategoryDto categoryDto, string id)
         {
-            return Ok(await _categoryService.UpdateCategory(category));
+            return Ok(await _categoryService.UpdateCategory(categoryDto, id));
         }
 
         [HttpDelete("{id:length(24)}", Name = "DeleteCategory")]

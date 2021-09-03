@@ -5,12 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HepsiYemek.Catalog.Core\HepsiYemek.Catalog.Core.csproj" />
-    <ProjectReference Include="..\HepsiYemek.Catalog.Data\HepsiYemek.Catalog.Data.csproj" />
+    <PackageReference Include="MongoDB.Bson" Version="2.13.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\" />
+    <ProjectReference Include="..\HepsiYemek.Catalog.Core\HepsiYemek.Catalog.Core.csproj" />
+    <ProjectReference Include="..\HepsiYemek.Catalog.Data\HepsiYemek.Catalog.Data.csproj" />
   </ItemGroup>
 
 </Project>

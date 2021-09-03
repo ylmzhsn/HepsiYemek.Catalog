@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using HepsiYemek.Catalog.Data.Entities;
+    using HepsiYemek.Catalog.Service.DTO;
 
     /// <summary>
     /// Interface of product repository service
@@ -40,16 +41,17 @@
         /// <summary>
         /// Creates a new product into collection
         /// </summary>
-        /// <param name="product"><see cref="Product"/></param>
+        /// <param name="productDto"><see cref="ProductDto"/></param>
         /// <returns><see cref="Task"/></returns>
-        Task CreateProduct(Product product);
+        Task<Product> CreateProduct(ProductDto productDto);
 
         /// <summary>
         /// Updates a product in collection
         /// </summary>
         /// <param name="product"><see cref="Product"/></param>
+        /// /// <param name="id"><see cref="string"/></param>
         /// <returns>Task TResult of <see cref="bool"/></returns>
-        Task<bool> UpdateProduct(Product product);
+        Task<bool> UpdateProduct(ProductDto productDto, string id);
 
         /// <summary>
         /// Deletes product from collection

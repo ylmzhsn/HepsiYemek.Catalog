@@ -33,7 +33,7 @@
 
             Categories = Database.GetCollection<Category>(catalogDatabaseSettings.CategoriesCollectionName);
 
-            CatalogContextSeed.SeedData(Products, Categories);
+            //CatalogContextSeed.SeedData(Products, Categories);
         }
 
         /// <summary>

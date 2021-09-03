@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using HepsiYemek.Catalog.Data.Entities;
+    using HepsiYemek.Catalog.Service.DTO;
 
     /// <summary>
     /// Interface of category repository service
@@ -33,16 +34,16 @@
         /// <summary>
         /// Creates a new category into collection
         /// </summary>
-        /// <param name="category"><see cref="Category"/></param>
+        /// <param name="categoryDto"><see cref="CategoryDto"/></param>
         /// <returns><see cref="Task"/></returns>
-        Task CreateCategory(Category category);
+        Task<Category> CreateCategory(CategoryDto categoryDto);
 
         /// <summary>
         /// Updates a category in collection
         /// </summary>
-        /// <param name="category"><see cref="Category"/></param>
+        /// <param name="category"><see cref="CategoryDto"/></param>
         /// <returns>Task TResult of <see cref="bool"/></returns>
-        Task<bool> UpdateCategory(Category category);
+        Task<bool> UpdateCategory(CategoryDto categoryDto, string id);
 
         /// <summary>
         /// Deletes category from collection

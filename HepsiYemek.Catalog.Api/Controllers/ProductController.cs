@@ -10,6 +10,7 @@
 
     using HepsiYemek.Catalog.Data.Entities;
     using HepsiYemek.Catalog.Service.Interfaces;
+    using HepsiYemek.Catalog.Service.DTO;
 
     [ApiController]
     [Route("api/products")]
@@ -82,18 +83,18 @@
 
         [HttpPost]
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Product>> CreateProduct([FromBody] Product product)
+        public async Task<ActionResult<Product>> CreateProduct([FromBody] ProductDto productDto)
         {
-            await _productService.CreateProduct(product);
+            var product = await _productService.CreateProduct(productDto);
 
             return CreatedAtRoute("GetProduct", new { id = product._id }, product);
         }
 
-        [HttpPut]
+        [HttpPut("{id:length(24)}", Name = "UpdateProduct")]
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> UpdateProduct([FromBody] Product product)
+        public async Task<IActionResult> UpdateProduct([FromBody] ProductDto productDto, string id)
         {
-            return Ok(await _productService.UpdateProduct(product));
+            return Ok(await _productService.UpdateProduct(productDto, id));
         }
 
         [HttpDelete("{id:length(24)}", Name = "DeleteProduct")]
