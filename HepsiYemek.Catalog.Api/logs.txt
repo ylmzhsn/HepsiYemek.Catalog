@@ -1,0 +1,70 @@
+2021-09-03 07:50:29.526 +03:00 [INF] User profile is available. Using 'C:\Users\h.yilmaz\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-09-03 07:50:30.266 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-03 07:50:30.268 +03:00 [INF] Hosting environment: Development
+2021-09-03 07:50:30.270 +03:00 [INF] Content root path: C:\SecondaryProjects\HepsiYemek.Catalog\HepsiYemek.Catalog\HepsiYemek.Catalog.Api
+2021-09-03 07:50:30.324 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44379/swagger/index.html - -
+2021-09-03 07:50:30.570 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44379/swagger/index.html - - - 200 - text/html;charset=utf-8 249.4658ms
+2021-09-03 07:50:30.852 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44379/swagger/v1/swagger.json - -
+2021-09-03 07:50:31.186 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44379/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 326.8264ms
+2021-09-03 07:50:53.886 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44379/api/categories/id - -
+2021-09-03 07:50:53.933 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44379/api/categories/id - - - 404 - - 47.3838ms
+2021-09-03 09:07:07.052 +03:00 [INF] User profile is available. Using 'C:\Users\h.yilmaz\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2021-09-03 09:07:07.925 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2021-09-03 09:07:07.931 +03:00 [INF] Hosting environment: Development
+2021-09-03 09:07:07.934 +03:00 [INF] Content root path: C:\SecondaryProjects\HepsiYemek.Catalog\HepsiYemek.Catalog\HepsiYemek.Catalog.Api
+2021-09-03 09:07:08.011 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44379/swagger/index.html - -
+2021-09-03 09:07:08.181 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44379/swagger/index.html - - - 200 - text/html;charset=utf-8 171.8661ms
+2021-09-03 09:07:08.350 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44379/swagger/v1/swagger.json - -
+2021-09-03 09:07:08.507 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44379/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 157.0256ms
+2021-09-03 09:07:15.040 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44379/api/categories - -
+2021-09-03 09:07:15.121 +03:00 [INF] Executing endpoint 'HepsiYemek.Catalog.Api.Controllers.CategoryController.GetCategories (HepsiYemek.Catalog.Api)'
+2021-09-03 09:07:15.166 +03:00 [INF] Route matched with {action = "GetCategories", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[HepsiYemek.Catalog.Data.Entities.Category]]] GetCategories() on controller HepsiYemek.Catalog.Api.Controllers.CategoryController (HepsiYemek.Catalog.Api).
+2021-09-03 09:07:16.229 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[HepsiYemek.Catalog.Data.Entities.Category, HepsiYemek.Catalog.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2021-09-03 09:07:16.254 +03:00 [INF] Executed action HepsiYemek.Catalog.Api.Controllers.CategoryController.GetCategories (HepsiYemek.Catalog.Api) in 1078.7312ms
+2021-09-03 09:07:16.261 +03:00 [INF] Executed endpoint 'HepsiYemek.Catalog.Api.Controllers.CategoryController.GetCategories (HepsiYemek.Catalog.Api)'
+2021-09-03 09:07:16.266 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44379/api/categories - - - 200 - application/json;+charset=utf-8 1225.9464ms
+2021-09-03 09:07:47.627 +03:00 [INF] Request starting HTTP/2 POST https://localhost:44379/api/categories application/json 40
+2021-09-03 09:07:47.631 +03:00 [INF] Executing endpoint 'HepsiYemek.Catalog.Api.Controllers.CategoryController.CreateCategory (HepsiYemek.Catalog.Api)'
+2021-09-03 09:07:47.643 +03:00 [INF] Route matched with {action = "CreateCategory", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HepsiYemek.Catalog.Data.Entities.Category]] CreateCategory(HepsiYemek.Catalog.Data.Entities.Category) on controller HepsiYemek.Catalog.Api.Controllers.CategoryController (HepsiYemek.Catalog.Api).
+2021-09-03 09:07:47.733 +03:00 [INF] Executing CreatedAtRouteResult, writing value of type 'HepsiYemek.Catalog.Data.Entities.Category'.
+2021-09-03 09:07:47.771 +03:00 [INF] Executed action HepsiYemek.Catalog.Api.Controllers.CategoryController.CreateCategory (HepsiYemek.Catalog.Api) in 126.3912ms
+2021-09-03 09:07:47.772 +03:00 [INF] Executed endpoint 'HepsiYemek.Catalog.Api.Controllers.CategoryController.CreateCategory (HepsiYemek.Catalog.Api)'
+2021-09-03 09:07:47.773 +03:00 [INF] Request finished HTTP/2 POST https://localhost:44379/api/categories application/json 40 - 201 - application/json;+charset=utf-8 146.0734ms
+2021-09-03 09:08:28.026 +03:00 [INF] Request starting HTTP/2 GET https://localhost:44379/api/categories/6131bbb3675eade4b0ca8410 - -
+2021-09-03 09:08:28.029 +03:00 [INF] Executing endpoint 'HepsiYemek.Catalog.Api.Controllers.CategoryController.GetCategoryById (HepsiYemek.Catalog.Api)'
+2021-09-03 09:08:28.034 +03:00 [INF] Route matched with {action = "GetCategoryById", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[HepsiYemek.Catalog.Data.Entities.Category]] GetCategoryById(System.String) on controller HepsiYemek.Catalog.Api.Controllers.CategoryController (HepsiYemek.Catalog.Api).
+2021-09-03 09:08:40.830 +03:00 [INF] Executing OkObjectResult, writing value of type 'HepsiYemek.Catalog.Data.Entities.Category'.
+2021-09-03 09:08:40.832 +03:00 [INF] Executed action HepsiYemek.Catalog.Api.Controllers.CategoryController.GetCategoryById (HepsiYemek.Catalog.Api) in 12794.841ms
+2021-09-03 09:08:40.863 +03:00 [INF] Executed endpoint 'HepsiYemek.Catalog.Api.Controllers.CategoryController.GetCategoryById (HepsiYemek.Catalog.Api)'
+2021-09-03 09:08:40.866 +03:00 [INF] Request finished HTTP/2 GET https://localhost:44379/api/categories/6131bbb3675eade4b0ca8410 - - - 200 - application/json;+charset=utf-8 12840.2678ms
+2021-09-03 09:09:11.930 +03:00 [INF] Request starting HTTP/2 PUT https://localhost:44379/api/categories/6131bbb3675eade4b0ca8410 application/json 46
+2021-09-03 09:09:11.931 +03:00 [INF] Executing endpoint 'HepsiYemek.Catalog.Api.Controllers.CategoryController.UpdateCategory (HepsiYemek.Catalog.Api)'
+2021-09-03 09:09:11.936 +03:00 [INF] Route matched with {action = "UpdateCategory", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UpdateCategory(HepsiYemek.Catalog.Data.Entities.Category) on controller HepsiYemek.Catalog.Api.Controllers.CategoryController (HepsiYemek.Catalog.Api).
+2021-09-03 09:09:11.953 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Boolean'.
+2021-09-03 09:09:11.955 +03:00 [INF] Executed action HepsiYemek.Catalog.Api.Controllers.CategoryController.UpdateCategory (HepsiYemek.Catalog.Api) in 17.4263ms
+2021-09-03 09:09:11.957 +03:00 [INF] Executed endpoint 'HepsiYemek.Catalog.Api.Controllers.CategoryController.UpdateCategory (HepsiYemek.Catalog.Api)'
+2021-09-03 09:09:11.959 +03:00 [INF] Request finished HTTP/2 PUT https://localhost:44379/api/categories/6131bbb3675eade4b0ca8410 application/json 46 - 200 - application/json;+charset=utf-8 29.1272ms
+2021-09-03 09:09:30.117 +03:00 [INF] Request starting HTTP/2 PUT https://localhost:44379/api/categories/6131bbb3675eade4b0ca8410 application/json 46
+2021-09-03 09:09:30.118 +03:00 [INF] Executing endpoint 'HepsiYemek.Catalog.Api.Controllers.CategoryController.UpdateCategory (HepsiYemek.Catalog.Api)'
+2021-09-03 09:09:30.120 +03:00 [INF] Route matched with {action = "UpdateCategory", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UpdateCategory(HepsiYemek.Catalog.Data.Entities.Category) on controller HepsiYemek.Catalog.Api.Controllers.CategoryController (HepsiYemek.Catalog.Api).
+2021-09-03 09:10:07.255 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Boolean'.
+2021-09-03 09:10:07.257 +03:00 [INF] Executed action HepsiYemek.Catalog.Api.Controllers.CategoryController.UpdateCategory (HepsiYemek.Catalog.Api) in 37134.9798ms
+2021-09-03 09:10:07.258 +03:00 [INF] Executed endpoint 'HepsiYemek.Catalog.Api.Controllers.CategoryController.UpdateCategory (HepsiYemek.Catalog.Api)'
+2021-09-03 09:10:07.260 +03:00 [INF] Request finished HTTP/2 PUT https://localhost:44379/api/categories/6131bbb3675eade4b0ca8410 application/json 46 - 200 - application/json;+charset=utf-8 37143.0689ms
+2021-09-03 09:11:26.020 +03:00 [INF] Request starting HTTP/2 PUT https://localhost:44379/api/categories/6131bbb3675eade4b0ca8410 application/json 92
+2021-09-03 09:11:26.021 +03:00 [INF] Executing endpoint 'HepsiYemek.Catalog.Api.Controllers.CategoryController.UpdateCategory (HepsiYemek.Catalog.Api)'
+2021-09-03 09:11:26.023 +03:00 [INF] Route matched with {action = "UpdateCategory", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UpdateCategory(HepsiYemek.Catalog.Data.Entities.Category) on controller HepsiYemek.Catalog.Api.Controllers.CategoryController (HepsiYemek.Catalog.Api).
+2021-09-03 09:11:26.032 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2021-09-03 09:11:26.045 +03:00 [INF] Executed action HepsiYemek.Catalog.Api.Controllers.CategoryController.UpdateCategory (HepsiYemek.Catalog.Api) in 20.2722ms
+2021-09-03 09:11:26.047 +03:00 [INF] Executed endpoint 'HepsiYemek.Catalog.Api.Controllers.CategoryController.UpdateCategory (HepsiYemek.Catalog.Api)'
+2021-09-03 09:11:26.048 +03:00 [INF] Request finished HTTP/2 PUT https://localhost:44379/api/categories/6131bbb3675eade4b0ca8410 application/json 92 - 400 - application/problem+json;+charset=utf-8 28.6976ms
+2021-09-03 09:11:39.378 +03:00 [INF] Request starting HTTP/2 PUT https://localhost:44379/api/categories/6131bbb3675eade4b0ca8410 application/json 90
+2021-09-03 09:11:39.380 +03:00 [INF] Executing endpoint 'HepsiYemek.Catalog.Api.Controllers.CategoryController.UpdateCategory (HepsiYemek.Catalog.Api)'
+2021-09-03 09:11:39.381 +03:00 [INF] Route matched with {action = "UpdateCategory", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UpdateCategory(HepsiYemek.Catalog.Data.Entities.Category) on controller HepsiYemek.Catalog.Api.Controllers.CategoryController (HepsiYemek.Catalog.Api).
+2021-09-03 09:11:42.795 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2021-09-03 09:11:42.797 +03:00 [INF] Executed action HepsiYemek.Catalog.Api.Controllers.CategoryController.UpdateCategory (HepsiYemek.Catalog.Api) in 3413.2917ms
+2021-09-03 09:11:42.798 +03:00 [INF] Executed endpoint 'HepsiYemek.Catalog.Api.Controllers.CategoryController.UpdateCategory (HepsiYemek.Catalog.Api)'
+2021-09-03 09:11:42.800 +03:00 [INF] Request finished HTTP/2 PUT https://localhost:44379/api/categories/6131bbb3675eade4b0ca8410 application/json 90 - 400 - application/problem+json;+charset=utf-8 3422.2201ms
+2021-09-03 09:12:05.127 +03:00 [INF] Request starting HTTP/2 PUT https://localhost:44379/api/categories/6131bbb3675eade4b0ca8410 application/json 79
+2021-09-03 09:12:05.129 +03:00 [INF] Executing endpoint 'HepsiYemek.Catalog.Api.Controllers.CategoryController.UpdateCategory (HepsiYemek.Catalog.Api)'
+2021-09-03 09:12:05.130 +03:00 [INF] Route matched with {action = "UpdateCategory", controller = "Category"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] UpdateCategory(HepsiYemek.Catalog.Data.Entities.Category) on controller HepsiYemek.Catalog.Api.Controllers.CategoryController (HepsiYemek.Catalog.Api).

@@ -22,6 +22,7 @@
                     .Enrich.WithMachineName()
                     .WriteTo.Debug()
                     .WriteTo.Console()
+                    .WriteTo.File($".\\logs.txt")
                     .WriteTo.Elasticsearch(
                         new ElasticsearchSinkOptions(new Uri(elasticUri))
                         {
