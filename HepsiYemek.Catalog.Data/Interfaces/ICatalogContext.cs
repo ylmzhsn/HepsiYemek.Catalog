@@ -9,6 +9,16 @@
     /// </summary>
     public interface ICatalogContext
     {
+        // <summary>
+        /// Get mongo low level client
+        /// </summary>
+        MongoClient Client { get; }
+
+        /// <summary>
+        /// Get the main mongo database
+        /// </summary>
+        IMongoDatabase Database { get; }
+
         /// <summary>
         /// Product collection
         /// </summary>
