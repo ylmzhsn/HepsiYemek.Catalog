@@ -9,6 +9,8 @@
     using HepsiYemek.Catalog.Data.Entities;
     using HepsiYemek.Catalog.Data.Interfaces;
     using HepsiYemek.Catalog.Service.Interfaces;
+    using HepsiYemek.Catalog.Core.CrossCuttingConcerns.Caching.Abstract;
+    using HepsiYemek.Catalog.Core.Utilities;
 
     /// <summary>
     /// Product repository service
@@ -16,14 +18,16 @@
     public class ProductService : IProductService
     {
         private readonly ICatalogContext _context;
+        private readonly ICacheService _cacheService;
 
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="context"><see cref="ICatalogContext"/></param>
-        public ProductService(ICatalogContext context)
+        public ProductService(ICatalogContext context, ICacheService cacheService)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            _cacheService = cacheService ?? throw new ArgumentNullException(nameof(cacheService));
         }
 
         /// <summary>
@@ -45,10 +49,25 @@
         /// <returns><see cref="Product"/></returns>
         public async Task<Product> GetProduct(string id)
         {
-            return await _context
+            var product = new Product();
+
+            if (_cacheService.Any(Constants.Redis.Product))
+            {
+                product = _cacheService.Get<Product>(Constants.Redis.Product);
+
+                return product;
+            }
+
+            product = await _context
                            .Products
-                           .Find(p => p._id.ToString() == id)
+                           .Find(p => p._id == id)
                            .FirstOrDefaultAsync();
+
+            _cacheService.Add(Constants.Redis.Product, product);
+
+            _cacheService.SetTTL(Constants.Redis.Product, TimeSpan.FromMinutes(5));
+
+            return product;
         }
 
         /// <summary>
@@ -113,7 +132,7 @@
         /// <returns>Task TResult of <see cref="bool"/></returns>
         public async Task<bool> DeleteProduct(string id)
         {
-            FilterDefinition<Product> filter = Builders<Product>.Filter.Eq(p => p._id.ToString(), id);
+            FilterDefinition<Product> filter = Builders<Product>.Filter.Eq(p => p._id, id);
 
             DeleteResult deleteResult = await _context
                                                 .Products

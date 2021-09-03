@@ -47,7 +47,7 @@
         {
             return await _context
                            .Categories
-                           .Find(p => p._id.ToString() == id)
+                           .Find(p => p._id == id)
                            .FirstOrDefaultAsync();
         }
 
@@ -85,7 +85,7 @@
         {
             var updateResult = await _context
                                         .Categories
-                                        .ReplaceOneAsync(filter: g => g._id.ToString() == category._id.ToString(), replacement: category);
+                                        .ReplaceOneAsync(filter: g => g._id == category._id, replacement: category);
 
             return updateResult.IsAcknowledged
                     && updateResult.ModifiedCount > 0;
@@ -98,7 +98,7 @@
         /// <returns>Task TResult of <see cref="bool"/></returns>
         public async Task<bool> DeleteCategory(string id)
         {
-            FilterDefinition<Category> filter = Builders<Category>.Filter.Eq(c => c._id.ToString(), id);
+            FilterDefinition<Category> filter = Builders<Category>.Filter.Eq(c => c._id, id);
 
             DeleteResult deleteResult = await _context
                                                 .Categories
