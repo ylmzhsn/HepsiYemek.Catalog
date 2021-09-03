@@ -1,4 +1,4 @@
-﻿namespace HepsiYemek.Catalog.Core.CrossCuttinConcerns.Logging.Loggers
+﻿namespace HepsiYemek.Catalog.Core.CrossCuttingConcerns.Logging.Loggers
 {
     using System;
 
