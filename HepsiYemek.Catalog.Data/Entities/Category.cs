@@ -12,8 +12,8 @@
         /// ObjectId of the category in mongodb collection
         /// </summary>
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public ObjectId _id { get; private set; }
+        //[BsonRepresentation(BsonType.ObjectId)]
+        public string _id { get; set; }
 
         /// <summary>
         /// Name of of the category

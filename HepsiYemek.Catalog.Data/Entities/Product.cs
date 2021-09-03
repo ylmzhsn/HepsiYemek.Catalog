@@ -12,8 +12,8 @@
         /// ObjectId of the product in mongodb collection
         /// </summary>
         [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public ObjectId _id { get; private set; }
+        //[BsonRepresentation(BsonType.ObjectId)]
+        public string _id { get; set; }
 
         /// <summary>
         /// Name of of the product
@@ -30,7 +30,6 @@
         /// CategoryId of the product
         /// Represents relationship between categories and products
         /// </summary>
-        [BsonRepresentation(BsonType.ObjectId)]
         public string CategoryId { get; set; }
 
         /// <summary>
